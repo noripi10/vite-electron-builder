@@ -43,16 +43,19 @@ app
  * Install Vue.js or any other extension in development mode only.
  * Note: You must install `electron-devtools-installer` manually
  */
-// if (import.meta.env.DEV) {
-//   app.whenReady()
-//     .then(() => import('electron-devtools-installer'))
-//     .then(({default: installExtension, VUEJS3_DEVTOOLS}) => installExtension(VUEJS3_DEVTOOLS, {
-//       loadExtensionOptions: {
-//         allowFileAccess: true,
-//       },
-//     }))
-//     .catch(e => console.error('Failed install extension:', e));
-// }
+if (import.meta.env.DEV) {
+  app
+    .whenReady()
+    .then(() => import('electron-devtools-installer'))
+    .then(({default: installExtension, REACT_DEVELOPER_TOOLS}) =>
+      installExtension(REACT_DEVELOPER_TOOLS, {
+        loadExtensionOptions: {
+          allowFileAccess: true,
+        },
+      }),
+    )
+    .catch(e => console.error('Failed install extension:', e));
+}
 
 /**
  * Check for new version of the application - production mode only.

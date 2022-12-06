@@ -1,6 +1,9 @@
-import {app, BrowserWindow} from 'electron';
+import {app, BrowserWindow, Menu} from 'electron';
 import {join} from 'path';
 import {URL} from 'url';
+
+// Native Menu を削除
+Menu.setApplicationMenu(null);
 
 async function createWindow() {
   const browserWindow = new BrowserWindow({
@@ -26,7 +29,8 @@ async function createWindow() {
     browserWindow?.show();
 
     if (import.meta.env.DEV) {
-      browserWindow?.webContents.openDevTools();
+      // DEV Menuを開く場合
+      // browserWindow?.webContents.openDevTools();
     }
   });
 
