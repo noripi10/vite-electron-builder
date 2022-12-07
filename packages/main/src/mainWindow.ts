@@ -1,9 +1,6 @@
-import {app, BrowserWindow, Menu} from 'electron';
-import {join} from 'path';
-import {URL} from 'url';
-
-// Native Menu を削除
-Menu.setApplicationMenu(null);
+import { app, BrowserWindow, Menu } from 'electron';
+import { join } from 'path';
+import { URL } from 'url';
 
 async function createWindow() {
   const browserWindow = new BrowserWindow({
@@ -16,6 +13,11 @@ async function createWindow() {
       preload: join(app.getAppPath(), 'packages/preload/dist/index.cjs'),
     },
   });
+
+  // Native Menu を削除
+  Menu.setApplicationMenu(null);
+  // Or
+  // browserWindow.setAutoHideMenuBar(true);
 
   /**
    * If the 'show' property of the BrowserWindow's constructor is omitted from the initialization options,
@@ -30,7 +32,7 @@ async function createWindow() {
 
     if (import.meta.env.DEV) {
       // DEV Menuを開く場合
-      // browserWindow?.webContents.openDevTools();
+      browserWindow?.webContents.openDevTools();
     }
   });
 
@@ -64,4 +66,6 @@ export async function restoreOrCreateWindow() {
   }
 
   window.focus();
+
+  return window;
 }
